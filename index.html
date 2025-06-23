@@ -8,6 +8,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        @media (max-width: 600px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 15px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .message {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .modal-content {
+    margin: 1rem;
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .forgive-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .hug-icon {
+    font-size: 3.5rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+}
+
         /* CSS Styles */
         * {
             margin: 0;
@@ -241,14 +278,14 @@
         </div>
         
         <div class="btn-container">
-            <a class="forgive-btn" 
-   href="https://wa.me/6283862096385?text=iya%20aku%20maafin" 
-   target="_blank">
-  Kalau kamu sudah maafin aku, klik ini
-</a>
+           
+  <button class="forgive-btn" id="forgiveBtn">
+    Kalau kamu sudah maafin aku, klik ini
+  </button>
+</div>
+
 
             <!-- <button class="forgive-btn" href="https://wa.me/6283862096385?text=iya%20aku%20maafin" target="_blank">Kalau kamu sudah maafin aku, klik ini</button> -->
-        </div>
         
         <footer>
             Terima kasih sudah menjadi bagian dari hidupku ❤️
@@ -316,5 +353,55 @@
             });
         });
     </script>
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const forgiveBtn = document.getElementById('forgiveBtn');
+    const heartsContainer = document.getElementById('hearts');
+    const modal = document.getElementById('modal');
+    const closeModal = document.querySelector('.close-modal');
+
+    function createHearts() {
+      heartsContainer.style.display = 'block';
+
+      for (let i = 0; i < 50; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        heartsContainer.appendChild(heart);
+      }
+
+      setTimeout(() => {
+        heartsContainer.style.display = 'none';
+        heartsContainer.innerHTML = '';
+      }, 4000);
+    }
+
+    forgiveBtn.addEventListener('click', function() {
+      createHearts();
+
+      setTimeout(() => {
+        modal.classList.add('active');
+        // Buka WhatsApp setelah popup tampil selama 3 detik
+        setTimeout(() => {
+          window.open("https://wa.me/6283862096385?text=iya%20aku%20maafin", "_blank");
+        }, 3000);
+      }, 2000);
+    });
+
+    closeModal.addEventListener('click', function() {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
